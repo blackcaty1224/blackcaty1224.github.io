@@ -36,14 +36,24 @@
       border-radius: 8px;
     }
     button {
-      background: #4CAF50;
-      color: #fff;
-      border: none;
       font-weight: bold;
       cursor: pointer;
     }
-    button:hover {
+    .save-btn {
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+    }
+    .save-btn:hover {
       background: #45a049;
+    }
+    .reset-btn {
+      background: #e53935;
+      color: #fff;
+      border: none;
+    }
+    .reset-btn:hover {
+      background: #d32f2f;
     }
     .record {
       background: #fff;
@@ -81,7 +91,8 @@
       <option value="負け">負け</option>
     </select>
 
-    <button onclick="addRecord()">記録する</button>
+    <button class="save-btn" onclick="addRecord()">記録する</button>
+    <button class="reset-btn" onclick="resetRecords()">リセット</button>
 
     <h2>記録一覧</h2>
     <div id="records"></div>
@@ -124,6 +135,13 @@
         `;
         document.getElementById("records").appendChild(recordDiv);
       });
+    }
+
+    function resetRecords() {
+      if (confirm("本当に記録をすべて消去しますか？")) {
+        localStorage.removeItem("records");
+        document.getElementById("records").innerHTML = "";
+      }
     }
 
     window.onload = loadData;
